@@ -1,10 +1,14 @@
-import React from 'react'
-import cart from '../Assets/cart_icon.png'
+import React, { useContext } from 'react'
+import carti from '../Assets/cart_icon.png'
 import {NavLink,Link} from 'react-router-dom'
 
 import './Nav.css'
+import { ShopContext } from '../Context/ShopContext'
 
 const Nav = () => {
+
+  const {cart} = useContext(ShopContext);
+
   return (
     <>
        
@@ -19,8 +23,8 @@ const Nav = () => {
                     </ul>
                 </div>
                 <div className="cart">
-                      <Link to='/cartP'> <img src={cart} alt="" /> </Link>  
-                        <div className="count"> 0 </div>
+                      <Link to='/cartP'> <img src={carti} alt="" /> </Link>  
+                        <div className="count"> {cart.length} </div>
                 </div>
             </div>
         </div>

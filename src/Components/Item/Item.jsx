@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import './Item.css'
 import {Link} from 'react-router-dom'
+import { ShopContext } from '../Context/ShopContext'
 export const Item = (props) => {
+   
+  const {addToCart} = useContext(ShopContext)
+
+
+
   return (
     <div className="items">
     <img src={props.image} alt="" /> 
@@ -13,7 +19,7 @@ export const Item = (props) => {
       <div className="item-price-old">
         ${props.old_price}
       </div>
-      <button> add to cart </button>
+      <button onClick={()=>addToCart(props) } > add to cart </button>
     </div>
   </div>
   )

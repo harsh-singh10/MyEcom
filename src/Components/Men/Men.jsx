@@ -4,8 +4,11 @@ import { ShopContext } from '../Context/ShopContext'
 import { Item } from '../Item/Item'; 
 import  '../Home/Home.css'
 
-const Men = (props) => {
+const Men = (props  ) => {
+   
+
   const {all_product} = useContext(ShopContext);
+
   console.log(all_product);
   return (
     <div div className='shopcategory-product' >
@@ -21,6 +24,7 @@ const Men = (props) => {
                   image={item.image}
                   new_price={item.new_price}
                   old_price={item.old_price}
+                 
               />
                 }
                 else{
