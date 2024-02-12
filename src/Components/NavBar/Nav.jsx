@@ -7,7 +7,7 @@ import { ShopContext } from '../Context/ShopContext'
 
 const Nav = () => {
 
-  const {cart} = useContext(ShopContext);
+  const {cart ,count} = useContext(ShopContext);
 
   return (
     <>
@@ -24,7 +24,7 @@ const Nav = () => {
                 </div>
                 <div className="cart">
                       <Link to='/cartP'> <img src={carti} alt="" /> </Link>  
-                        <div className="count"> {cart.length} </div>
+                        <div className="count"> {count} </div>
                 </div>
             </div>
         </div>

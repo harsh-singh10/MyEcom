@@ -1,39 +1,54 @@
-import {React , createContext , useState} from "react";
+import { React, createContext, useState } from "react";
 
 import all_product from "../Assets/all_product"
 
 
-export  const ShopContext = createContext(null);
+export const ShopContext = createContext(null);
 
-const ShopContextProvider = ({children})=> {
+const ShopContextProvider = ({ children }) => {
 
-    const [cart , setCart] = useState([]);
-     console.log(cart);
-    const addToCart = (item)=>{
-     //  setCart((prev) => [...prev , {...item , quantity:1}])
+  const [cart, setCart] = useState([]);
+  console.log(cart);
+  const addToCart = (item) => {
 
-  
-     const existingItemIndex = cart.findIndex((cartItem) => cartItem.id === item.id);
-
-  if (existingItemIndex !== -1) {
-    const updatedCart = [...cart];
-    updatedCart[existingItemIndex].quantity += 1;
-    setCart((prev)=> [...prev ,updatedCart]);
-  } else {
-    setCart([...cart, { ...item, quantity: 1 }]);
-  }
-     
-      
+    const existingItem = cart.findIndex(data => data.id === item.id);
+    if (existingItem !== -1) {
+      const update = [...cart];
+      update[existingItem].quantity +=1;
+      setCart(update);
     }
+    else {
 
-    
-    const contextValue = {all_product , cart , addToCart};
+      setCart((prev) => [...prev, { ...item, quantity: 1 }])
+    }
+ }
 
-    return(
-        <ShopContext.Provider value={contextValue}>
-                {children}
-        </ShopContext.Provider>
-    )
+        const count = cart.reduce((total , q) => total+q.quantity , 0)
+
+         const totalAmount = cart.map((item)=> item.new_price * item.quantity ).reduce((total,amount) => total + amount,0 )
+         
+
+  const handleIncrement = (cartIndex) => {
+    const updatedCart = [...cart];
+    updatedCart[cartIndex].quantity += 1;
+
+    setCart(updatedCart);
+
+  };
+  const handleDecrement = (cartIndex) => {
+    const decremetedCart = [...cart];
+    decremetedCart[cartIndex].quantity -= 1;
+    setCart(decremetedCart)
+
+  }
+
+  const contextValue = { totalAmount,all_product, cart, addToCart, handleIncrement, handleDecrement,count };
+
+  return (
+    <ShopContext.Provider value={contextValue}>
+      {children}
+    </ShopContext.Provider>
+  )
 
 }
 
